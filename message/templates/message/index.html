@@ -1,0 +1,450 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>박채용 8000일 - 마법사의 탄생</title>
+
+		<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image" content="{% static 'message/thumbnail.jpg' %}" />
+		<meta property="og:title" content="박채용 8000일 - 마법사의 탄생" />
+		<meta property="og:description" content="박채용군이 태어난지 8000일 됨을 축하하는 페이지입니다." />
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<style>
+		@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+		@import url('https://fonts.googleapis.com/css?family=Cinzel:400,700,900');
+
+		@font-face {
+			font-family: gill-sans-mt-condensed;
+			src: url({% static 'message/gill-sans-mt-condensed.woff' %});
+		}
+
+		div#poster {
+			height: 100vh;
+			background-image: url("{% static 'message/poster_background.gif' %}");
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: cover;
+		}
+
+		div#poster h1.top {
+			font-family: 'Noto Sans KR', sans-serif;
+			color: white;
+			font-size: 3vw;
+			text-align: justify;
+		}
+
+		div#poster h1.top:after {
+		  content: "";
+		  display: inline-block;
+		  width: 100%;
+		}
+
+		div#poster div#bottom h1#info {
+			font-family: 'Cinzel', serif;
+			color: white;
+			text-align: center;
+			text-shadow: 0px 0px 10px black;
+			font-size: 4vw;
+			margin-top: 1vw;
+		}
+
+		div#poster div#bottom {
+			position: absolute;
+			bottom: -10px;
+			width: 100%;
+		}
+
+		div#poster div#bottom p#logo_8000 {
+			margin: 0;
+		}
+
+		div#poster div#bottom p#logo_8000 span {
+			color: white;
+			background-color: red;
+			font-family: 'gill-sans-mt-condensed';
+			font-size: 3vw;
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+
+		div#poster div#frog {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+		}
+
+		div#poster div#frog img {
+			position: relative;
+			height: auto;
+			max-height: 100vh;
+			width: auto;
+			max-width: 100%;
+			top: 100%;
+		}
+
+		div#poster div#frog img.circle {
+			position: absolute;
+			height: auto;
+			max-height: 100vh;
+			width: auto;
+			max-width: 100%;
+			top: 0;
+			opacity: 0.85;
+		}
+
+		div#poster div#bottom * {
+			animation-name: hovering;
+			animation-duration: 1s;
+			animation-iteration-count: infinite;
+			animation-timing-function: ease-in-out;
+			animation-direction: alternate-reverse;
+		}
+
+		div#poster div#bottom img {
+			animation-delay: 0.3s;
+		}
+
+		div#poster div#bottom h1 {
+			animation-delay: 0.6s;
+		}
+
+		div#comment {
+			background-color: #288a56;
+			font-family: 'Noto Sans KR', sans-serif;
+			color: white;
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
+
+		@media (min-width: 750px) {
+			div#comment h1.message {
+				font-size: 25px;
+				text-align: center;
+			}
+		}
+		@media (max-width: 750px) {
+			div#comment h1.message {
+				font-size: 3.5vw;
+				text-align: center;
+			}
+		}
+
+		div#comment form button {
+			background-color: transparent;
+			border: 3px solid white;
+		}
+
+		div#comment form button:hover {
+			background-color: white;
+			color: #288a56;
+		}
+
+		div#counter {
+			font-family: 'Noto Sans KR', sans-serif;
+			background-color: white;
+			color: #288a56;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			text-align: center;
+		}
+
+		div#counter h1 {
+			font-size: 5vw;
+		}
+
+		div#counter h1#time {
+			font-size: 10vw;
+		}
+
+		div#funding {
+			font-family: 'Noto Sans KR', sans-serif;
+			background-color: #288a56;
+			color: white;
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
+
+		@keyframes circle {
+			0%	{ transform: translate(-2px, 0px); }
+			25% { transform: translate(0px, 2px); }
+			50% { transform: translate(0px, -2px); }
+			75% { transform: translate(2px, 0px); }
+			100% { transform: translate(-2px, 0px); }
+		}
+
+		@keyframes hovering {
+			0% { padding-top: 0px; padding-bottom: 5px; }
+			100% { padding-top: 5px; padding-bottom: 0px; }
+		}
+
+		</style>
+
+	</head>
+	<body>
+		<div id="poster">
+
+			<div id="frog">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+
+							<img id="frog_img" class="img-responsive center-block" src="{% static 'message/poster_frog.png' %}" alt="박채용">
+
+							<img class="img-responsive circle" src="{% static 'message/poster_circle2.png' %}" alt="마법진2">
+							<img class="img-responsive circle" src="{% static 'message/poster_circle1.png' %}" alt="마법진1">
+							<img class="img-responsive circle" src="{% static 'message/poster_circle3.png' %}" alt="마법진3">
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="row">
+
+					<div class="col-xs-12">
+						<h1 class="top">박 채 용 8 0 0 0 일 기 념 행 사</h1>
+					</div>
+
+				</div>
+			</div>
+
+			<div id="bottom">
+
+				<div class="container">
+					<div class="row">
+
+						<p class="text-center" id="logo_8000"><span>8000</span></p>
+						<div class="col-xs-10 col-xs-offset-1">
+							<img class="img-responsive center-block" src="{% static 'message/poster_title.png' %}" id="title" alt="DOCTOR CHAEYONG">
+						</div>
+						<h1 class="col-xs-12" id="info">January 18, 10pm, Snackbar</h1>
+						<br>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div id="comment">
+			<div class="container">
+
+				<h1 class="text-center">응원의 메시지</h1>
+
+				{% if message_list %}
+					{% for message in message_list %}
+						<h1 class="message">{{ message.message_text }} - {{ message.writer }}</h1>
+					{% endfor %}
+				{% endif %}
+
+				<br>
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+					<form id="messageForm" class="form-horizontal" action="/message" method="post">
+						{% csrf_token %}
+						<div class="form-group">
+							<label class="col-xs-3 control-label" for="content">메시지</label>
+							<div class="col-xs-9 col-sm-8 col-lg-7">
+								<input type="text" class="form-control" id="content" placeholder="20자 제한" name="content" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-3 control-label" for="writer">이름</label>
+							<div class="col-xs-9 col-sm-8 col-lg-7">
+								<input type="text" class="form-control" id="writer" placeholder="5자 제한" name="writer" required>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-lg center-block">응원하기</button>
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+		<div id="counter">
+			<img class="center-block img-responsive" src="{% static 'message/pepethefrog.png' %}">
+			<h1 id="counter_info">박채용 8000일까지 남은 시간</h1>
+			<h1 id="time">00:00:00</h1>
+		</div>
+
+		<div id="funding">
+			<div class="container">
+				<h1 class="text-center">후원해주신 분들</h1>
+				<h5 class="text-center">후원해주신 분들께서는 금액에 따라 소정의 리워드와 행사 참여권을 드렸습니다</h5>
+				<div class="row">
+					<h2 class="text-center col-xs-6 col-sm-4">김도연</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">김류희</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">김민경</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">김민수</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">김병주</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">박건우</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">박제현</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">서진영</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">신재민</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">안태훈</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">오주성</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">오창훈</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">유상우</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">윤채림</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">이다훈</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">이소현</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">이승규</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">임범수</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">조우성</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">최동준</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">최준경</h2>
+					<h2 class="text-center col-xs-6 col-sm-4">한예슬</h2>					
+					<h2 class="text-center col-xs-6 col-sm-4 col-xs-offset-3 col-sm-offset-0">황일환</h2>
+				</div>
+			</div>
+		</div>
+
+		<script>
+		var frog = $("#frog_img");
+		var circles = $(".circle");
+
+		var set_circles = function () {
+			circles.css("margin-left", frog.css("margin-left"));
+			circles.css("width", frog.css("width"));
+			circles.css("height", frog.css("height"));
+
+			circles.each(function(i) {
+				$(this).css("animation-name", "circle");
+				$(this).css("animation-duration", (i + 1) * 0.1 + "s");
+				$(this).css("animation-iteration-count", "infinite");
+			});
+		};
+
+		window.addEventListener("resize", set_circles);
+
+		window.onload = set_circles;
+
+		$("#messageForm").validate({
+			rules: {
+				content: {required: true, maxlength: 20},
+				writer: {required: true, maxlength: 5},
+			},
+			messages: {
+				content: {
+					required: "메시지를 입력하세요.",
+					maxlength: "메시지는 최대 20자입니다."
+				},
+				writer: {
+					required: "이름을 입력하세요.",
+					maxlength: "이름은 최대 5자입니다."
+				},
+			},
+			submitHandler: function (frm) {
+				frm.submit();
+			},
+			success: function (e) {
+
+			}
+		});
+
+		var goal = new Date("Wed Jan 18 2017 00:00:00 GMT+0900 (Seoul Time)");
+
+		var DateDiff = {
+
+			inSeconds: function(d1, d2) {
+				var t2 = d2.getTime();
+				var t1 = d1.getTime();
+
+				var result = parseInt((t2-t1)/1000%60);
+
+				if(t2 - t1 < 0)
+					result = 0;
+
+				return result > 9? result : "0" + result;
+			},
+
+			inMinutes: function(d1, d2) {
+				var t2 = d2.getTime();
+				var t1 = d1.getTime();
+
+				var result = parseInt((t2-t1)/(1000*60) % 60);
+
+				if(t2 - t1 < 0)
+					result = 0;
+
+				return result > 9? result : "0" + result;
+			},
+
+			inHours: function(d1, d2) {
+				var t2 = d2.getTime();
+				var t1 = d1.getTime();
+
+				var result = parseInt((t2-t1)/(1000*60*60));
+
+				if(t2 - t1 < 0)
+					result = 0;
+
+				return result > 9? result : "0" + result;
+			},
+
+	    inDays: function(d1, d2) {
+	        var t2 = d2.getTime();
+	        var t1 = d1.getTime();
+
+	        var result = parseInt((t2-t1)/(24*3600*1000));
+
+	        return result > 9? result : "0" + result;
+	    },
+
+	    inWeeks: function(d1, d2) {
+	        var t2 = d2.getTime();
+	        var t1 = d1.getTime();
+
+	        return parseInt((t2-t1)/(24*3600*1000*7));
+	    },
+
+	    inMonths: function(d1, d2) {
+	        var d1Y = d1.getFullYear();
+	        var d2Y = d2.getFullYear();
+	        var d1M = d1.getMonth();
+	        var d2M = d2.getMonth();
+
+	        return (d2M+12*d2Y)-(d1M+12*d1Y);
+	    },
+
+	    inYears: function(d1, d2) {
+	        return d2.getFullYear()-d1.getFullYear();
+	    }
+		}
+
+		var setTime = function() {
+			var current = new Date();
+			var time = document.getElementById("time");
+			var counter_info = document.getElementById("counter_info");
+
+			if (current.getTime() < goal.getTime())
+				time.innerHTML = DateDiff.inHours(current, goal) + ":" + DateDiff.inMinutes(current, goal) + ":" + DateDiff.inSeconds(current, goal);
+			else {
+				time.innerHTML = DateDiff.inHours(goal, current) + ":" + DateDiff.inMinutes(goal, current) + ":" + DateDiff.inSeconds(goal, current);
+				counter_info.innerHTML = "박채용이 마법사가 된 후 지난 시간"
+			}
+		}
+
+		setInterval(setTime, 100);
+
+		</script>
+	</body>
+<html>
